@@ -10,6 +10,11 @@ def create_stickman(canvas):
         canvas.create_line(150, 150, 120, 200, fill="blue", width=2)  # 左足
     ]
     return stickman_parts
+
+def move_stickman(canvas, stickman_parts):
+    for part in stickman_parts:
+        canvas.move(part, 10, 0)  # 各部分を右に10ピクセル移動
+    root.after(100, move_stickman, canvas, stickman_parts)  # 100ミリ秒後に再度move_stickmanを呼び出す
     
 # Tkインターフェイスを作成
 root = tk.Tk()
@@ -18,7 +23,8 @@ root = tk.Tk()
 canvas = tk.Canvas(root, width=300, height=300)
 canvas.pack()
 
-create_stickman(canvas)
+stickman_parts = create_stickman(canvas)
+move_stickman(canvas, stickman_parts)  # スティックマンを移動させる
 
 # ウィンドウが閉じるまで実行
 root.mainloop()
