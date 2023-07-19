@@ -39,7 +39,8 @@ def draw_frame(frame_num):
 
         # 骨格を描画
         for (i, j) in skeleton:
-            canvas.create_line(keypoints[i][0], keypoints[i][1], keypoints[j][0], keypoints[j][1], fill=color)
+            if keypoints[i] != (0, 0) and keypoints[j] != (0, 0):  # Skip drawing if either point is (0, 0)
+                canvas.create_line(keypoints[i][0], keypoints[i][1], keypoints[j][0], keypoints[j][1], fill=color)
 
     # If there are more frames, schedule the next one
     if frame_num < 99:  # assuming there are 100 frames numbered 0 to 99
